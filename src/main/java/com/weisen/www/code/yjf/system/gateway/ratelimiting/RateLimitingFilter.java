@@ -4,11 +4,6 @@ import com.weisen.www.code.yjf.system.security.SecurityUtils;
 
 import java.time.Duration;
 import java.util.function.Supplier;
-import javax.cache.CacheManager;
-import javax.cache.Caching;
-import javax.cache.configuration.CompleteConfiguration;
-import javax.cache.configuration.MutableConfiguration;
-import javax.cache.spi.CachingProvider;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -39,21 +34,10 @@ public class RateLimitingFilter extends ZuulFilter {
 
     private final JHipsterProperties jHipsterProperties;
 
-    private javax.cache.Cache<String, GridBucketState> cache;
-
     private ProxyManager<String> buckets;
 
     public RateLimitingFilter(JHipsterProperties jHipsterProperties) {
         this.jHipsterProperties = jHipsterProperties;
-
-        CachingProvider cachingProvider = Caching.getCachingProvider();
-        CacheManager cacheManager = cachingProvider.getCacheManager();
-        CompleteConfiguration<String, GridBucketState> config =
-            new MutableConfiguration<String, GridBucketState>()
-                .setTypes(String.class, GridBucketState.class);
-
-        this.cache = cacheManager.createCache(GATEWAY_RATE_LIMITING_CACHE_NAME, config);
-        this.buckets = Bucket4j.extension(JCache.class).proxyManagerForCache(cache);
     }
 
     @Override
