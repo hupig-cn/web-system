@@ -235,7 +235,8 @@ public class OAuth2AuthenticationServiceTest {
         Assertions.assertEquals(0, newRefreshTokenCookie.getMaxAge());
     }
 
-    @Test
+    @SuppressWarnings("unlikely-arg-type")
+	@Test
     public void testStripTokens() {
         MockHttpServletRequest request = createMockHttpServletRequest();
         HttpServletRequest newRequest = authenticationService.stripTokens(request);

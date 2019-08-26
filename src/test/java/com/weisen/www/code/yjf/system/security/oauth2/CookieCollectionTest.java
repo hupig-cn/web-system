@@ -45,7 +45,8 @@ public class CookieCollectionTest {
         assertThat(cookies).isNotEmpty();
     }
 
-    @Test
+    @SuppressWarnings("unlikely-arg-type")
+	@Test
     public void contains() {
         CookieCollection cookies = new CookieCollection(cookie);
         assertThat(cookies.contains(cookie)).isTrue();
@@ -79,7 +80,8 @@ public class CookieCollectionTest {
         assertThat(array[0]).isEqualTo(cookie);
     }
 
-    @Test
+    @SuppressWarnings("unlikely-arg-type")
+	@Test
     public void add() {
         CookieCollection cookies = new CookieCollection(cookie);
         Cookie newCookie = new Cookie(BROWNIE_NAME, "mmh");
@@ -89,7 +91,8 @@ public class CookieCollectionTest {
         assertThat(cookies.contains(BROWNIE_NAME)).isTrue();
     }
 
-    @Test
+    @SuppressWarnings("unlikely-arg-type")
+	@Test
     public void addAgain() {
         CookieCollection cookies = new CookieCollection(cookie, brownieCookie, cupsCookie);
         Cookie white = new Cookie(COOKIE_NAME, "white");
@@ -109,7 +112,8 @@ public class CookieCollectionTest {
         assertThat(c).isEqualTo(cookie);
     }
 
-    @Test
+    @SuppressWarnings("unlikely-arg-type")
+	@Test
     public void remove() {
         CookieCollection cookies = new CookieCollection(cookie, brownieCookie, cupsCookie);
         cookies.remove(cookie);
@@ -120,7 +124,8 @@ public class CookieCollectionTest {
         assertThat(cookies.contains(BROWNIE_NAME)).isTrue();
     }
 
-    @Test
+    @SuppressWarnings("unlikely-arg-type")
+	@Test
     public void containsAll() {
         List<Cookie> content = Arrays.asList(cookie, brownieCookie);
         CookieCollection cookies = new CookieCollection(content);
@@ -146,7 +151,8 @@ public class CookieCollectionTest {
     @Test
     public void addAllEmpty() {
         CookieCollection cookies = new CookieCollection(cookie, brownieCookie, cupsCookie);
-        boolean modified = cookies.addAll(Collections.EMPTY_LIST);
+        @SuppressWarnings("unchecked")
+		boolean modified = cookies.addAll(Collections.EMPTY_LIST);
         assertThat(modified).isFalse();
         assertThat(cookies).contains(cookie, brownieCookie, cupsCookie);
     }
@@ -171,7 +177,8 @@ public class CookieCollectionTest {
     @Test
     public void removeAllByName() {
         CookieCollection cookies = new CookieCollection(cookie, brownieCookie, cupsCookie);
-        boolean modified = cookies.removeAll(Arrays.asList(COOKIE_NAME, BROWNIE_NAME));
+        @SuppressWarnings("unlikely-arg-type")
+		boolean modified = cookies.removeAll(Arrays.asList(COOKIE_NAME, BROWNIE_NAME));
         assertThat(modified).isTrue();
         assertThat(cookies).hasSize(1);
         assertThat(cookies).doesNotContain(brownieCookie, cookie);
