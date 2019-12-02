@@ -53,6 +53,9 @@ public class RefreshTokenFilter extends GenericFilterBean {
         throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
+        httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
+        httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+        httpServletResponse.setHeader("Access-Control-Allow-Credentials", "true");
         try {
             httpServletRequest = refreshTokensIfExpiring(httpServletRequest, httpServletResponse);
         } catch (ClientAuthenticationException ex) {
