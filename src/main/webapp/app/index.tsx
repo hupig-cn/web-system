@@ -26,6 +26,7 @@ const rootEl = document.getElementById('root');
 
 const render = Component =>
   ReactDOM.render(
+    // @ts-ignore
     <ErrorBoundary>
       <Provider store={store}>
         <div>
